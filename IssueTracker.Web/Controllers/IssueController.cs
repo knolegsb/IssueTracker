@@ -83,7 +83,7 @@ namespace IssueTracker.Web.Controllers
 
             var userId = User.Identity.GetUserId();
             var user = _context.Users.Find(userId);
-            _context.Logs.Add(new LogAction(user, "View", "Issue", "Viewed issue " + id));
+            _context.Logs.Add(new LogAction(user, "Delete", "Issue", "Deleted issue " + id));
             _context.SaveChanges();
 
             _context.SaveChanges();
