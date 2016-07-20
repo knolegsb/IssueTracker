@@ -1,12 +1,7 @@
 ﻿using IssueTracker.Web.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using StructureMap;
 
 namespace IssueTracker.Web
 {
@@ -21,14 +16,14 @@ namespace IssueTracker.Web
 
             DependencyResolver.SetResolver(new StructureMapDependencyResolver());
 
-            ObjectFactory.Configure(cfg =>
-            {
-                cfg.Scan(scan =>
-                {
-                    scan.TheCallingAssembly();
-                    scan.WithDefaultConventions()
-                });
-            });
+            //ObjectFactory.Configure(cfg =>
+            //{
+            //    cfg.Scan(scan =>
+            //    {
+            //        scan.TheCallingAssembly();
+            //        scan.WithDefaultConventions()
+            //    });
+            //});
         }
     }
 }

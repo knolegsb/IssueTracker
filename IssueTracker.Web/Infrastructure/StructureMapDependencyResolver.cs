@@ -9,16 +9,16 @@ namespace IssueTracker.Web.Infrastructure
 {
     public class StructureMapDependencyResolver : IDependencyResolver
     {
-        private readonly Func<IContainer> _factory;
+        //private readonly Func<IContainer> _factory;
 
-        public StructureMapDependencyResolver()
-        {
+        //public StructureMapDependencyResolver()
+        //{
 
-        }
-        public StructureMapDependencyResolver(Func<IContainer> factory)
-        {
-            _factory = factory;
-        }
+        //}
+        //public StructureMapDependencyResolver(Func<IContainer> factory)
+        //{
+        //    _factory = factory;
+        //}
 
         public object GetService(Type serviceType)
         {
@@ -26,13 +26,14 @@ namespace IssueTracker.Web.Infrastructure
             {
                 return null;
             }
-            var factory = _factory();
-            return serviceType.IsAbstract || serviceType.IsAbstract ? factory.TryGetInstance(serviceType) : factory.GetInstance(serviceType);
+            //var factory = _factory();
+            return serviceType.IsAbstract || serviceType.IsInterface ? ObjectFactory.TryGetInstance(serviceType) : ObjectFactory.GetInstance(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return _factory().GetAllInstances(serviceType).Cast<object>();
+            //return _factory().GetAllInstances(serviceType).Cast<object>();
+            return ObjectFactory.GetAllInstances(serviceType).Cast<object>();
         }
     }
 }

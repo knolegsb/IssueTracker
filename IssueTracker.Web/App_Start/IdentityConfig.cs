@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using IssueTracker.Web.Data;
+using IssueTracker.Web.Domain;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using IssueTracker.Web.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace IssueTracker.Web
 {
@@ -96,10 +92,10 @@ namespace IssueTracker.Web
         {
         }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
-        {
-            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
-        }
+        //public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+        //{
+        //    return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
+        //}
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
