@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using StructureMap.TypeRules;
 
 namespace IssueTracker.Web
 {
@@ -26,21 +25,25 @@ namespace IssueTracker.Web
 
             ObjectFactory.Configure(cfg =>
             {
-                cfg.Scan(scan =>
-                {
-                    scan.TheCallingAssembly();
-                    scan.WithDefaultConventions();
-                    scan.With(new ControllerConvention());
-                });
+                //cfg.Scan(scan =>
+                //{
+                //    scan.TheCallingAssembly();
+                //    scan.WithDefaultConventions();
+                //    scan.With(new ControllerConvention());
+                //});
+
+                cfg.AddRegistry(new StandartRegistry());
+                cfg.AddRegistry(new ControllerRegistry());
+                cfg.AddRegistry(new ActionFilterRegistry(() => Container ?? ObjectFactory.Container));
 
                 // for logfilter
-                cfg.For<IFilterProvider>()
-                    .Use(new StructureMapFilterProvider(() => Container ?? ObjectFactory.Container));
+                //cfg.For<IFilterProvider>()
+                //    .Use(new StructureMapFilterProvider(() => Container ?? ObjectFactory.Container));
 
-                cfg.SetAllProperties(x => x.Matching(p => p.DeclaringType.CanBeCastTo(typeof(ActionFilterAttribute)) &&
-                                                            p.DeclaringType.Namespace.StartsWith("IssueTracker") &&
-                                                            !p.PropertyType.IsPrimitive &&
-                                                            p.PropertyType != typeof(string)));
+                //cfg.SetAllProperties(x => x.Matching(p => p.DeclaringType.CanBeCastTo(typeof(ActionFilterAttribute)) &&
+                //                                            p.DeclaringType.Namespace.StartsWith("IssueTracker") &&
+                //                                            !p.PropertyType.IsPrimitive &&
+                //                                            p.PropertyType != typeof(string)));
             });
         }
 
