@@ -49,7 +49,7 @@ namespace IssueTracker.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Log("Viewed issue")]
+        [Log("Viewed issue {id}")]
         public ActionResult View(int id)
         {
             var issue = _context.Issues.Find(id);
@@ -72,7 +72,7 @@ namespace IssueTracker.Web.Controllers
             });
         }
 
-        [HttpPost, ValidateAntiForgeryToken,Log("Deleted issue")]
+        [HttpPost, ValidateAntiForgeryToken,Log("Deleted issue {id}")]
         public ActionResult Delete(int id)
         {
             var issue = _context.Issues.Find(id);
