@@ -5,9 +5,12 @@ namespace IssueTracker.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
+        //[Required]
+        //[Display(Name = "Email")]
+        //public string Email { get; set; }
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
     }
 
     public class ExternalLoginListViewModel
