@@ -1,4 +1,5 @@
 ﻿using IssueTracker.Web.Domain;
+using IssueTracker.Web.Infrastructure;
 using IssueTracker.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -11,7 +12,7 @@ using System.Web.Mvc;
 namespace IssueTracker.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : IssueTrackerController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
