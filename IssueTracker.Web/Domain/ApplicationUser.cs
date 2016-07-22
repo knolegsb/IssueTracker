@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace IssueTracker.Web.Domain
 {
@@ -12,5 +13,7 @@ namespace IssueTracker.Web.Domain
         //    // Add custom user claims here
         //    return userIdentity;
         //}
+        public IList<Issue> Assignments { get; set; } 
+        
     }
 }

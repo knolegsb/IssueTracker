@@ -44,6 +44,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -147,9 +159,6 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -207,6 +216,7 @@
     <Compile Include="Infrastructure\CurrentUser.cs" />
     <Compile Include="Infrastructure\ICurrentUser.cs" />
     <Compile Include="Infrastructure\IssueTrackerController.cs" />
+    <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
     <Compile Include="Infrastructure\MvcRegistry.cs" />
     <Compile Include="Infrastructure\StandartRegistry.cs" />
@@ -220,9 +230,18 @@
     <Compile Include="Migrations\201607201707400_CreatedIssueAndLogTable.Designer.cs">
       <DependentUpon>201607201707400_CreatedIssueAndLogTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607222210113_ChangeEmailColumnToUserName.cs" />
+    <Compile Include="Migrations\201607222210113_ChangeEmailColumnToUserName.Designer.cs">
+      <DependentUpon>201607222210113_ChangeEmailColumnToUserName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607222302417_ChangeInitialConfiguration.cs" />
+    <Compile Include="Migrations\201607222302417_ChangeInitialConfiguration.Designer.cs">
+      <DependentUpon>201607222302417_ChangeInitialConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\ApplicationUser.cs" />
+    <Compile Include="Models\Issue\AssignmentStatsViewModel.cs" />
     <Compile Include="Models\Issue\EditIssueForm.cs" />
     <Compile Include="Models\Issue\IssueDetailsViewModel.cs" />
     <Compile Include="Models\Issue\IssueSummaryViewModel.cs" />
@@ -232,6 +251,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
+      <Link>AutoMapper.Net4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -305,6 +328,8 @@
     <Content Include="Views\Issue\New.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -325,6 +350,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607201707400_CreatedIssueAndLogTable.resx">
       <DependentUpon>201607201707400_CreatedIssueAndLogTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607222210113_ChangeEmailColumnToUserName.resx">
+      <DependentUpon>201607222210113_ChangeEmailColumnToUserName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607222302417_ChangeInitialConfiguration.resx">
+      <DependentUpon>201607222302417_ChangeInitialConfiguration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

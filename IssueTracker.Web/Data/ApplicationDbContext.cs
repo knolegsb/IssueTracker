@@ -1,13 +1,13 @@
-using System.Data.Entity;
 using IssueTracker.Web.Domain;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace IssueTracker.Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection"/*, throwIfV1Schema: false*/)
         {
         }
 

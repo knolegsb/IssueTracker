@@ -1,12 +1,11 @@
-﻿using System;
+﻿using IssueTracker.Web.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using IssueTracker.Web.Models;
 
 namespace IssueTracker.Web.Controllers
 {
@@ -361,15 +360,15 @@ namespace IssueTracker.Web.Controllers
             return false;
         }
 
-        private bool HasPhoneNumber()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
-            }
-            return false;
-        }
+        //private bool HasPhoneNumber()
+        //{
+        //    var user = UserManager.FindById(User.Identity.GetUserId());
+        //    if (user != null)
+        //    {
+        //        return user.PhoneNumber != null;
+        //    }
+        //    return false;
+        //}
 
         public enum ManageMessageId
         {

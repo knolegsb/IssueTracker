@@ -38,10 +38,8 @@ namespace IssueTracker.Web.Filters
                 description = description.Replace("{" + kvp.Key + "}", kvp.Value.ToString());
             }
 
-            Context.Logs.Add(new LogAction(CurrentUser.User,
-                filterContext.ActionDescriptor.ActionName,
-                filterContext.ActionDescriptor.ControllerDescriptor.ControllerName,
-                description)); // Description -> description
+            Context.Logs.Add(new LogAction(CurrentUser.User, filterContext.ActionDescriptor.ActionName,
+                filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, description)); // Description -> description
 
             Context.SaveChanges();
         }

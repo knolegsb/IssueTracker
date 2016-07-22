@@ -17,14 +17,14 @@ namespace IssueTracker.Web.Domain
 
         }
 
-        public Issue(ApplicationUser creator, ApplicationUser assignedTo, /*IssueType type,*/ string subject, string body)
+        public Issue(ApplicationUser creator, ApplicationUser assignedTo, IssueType type, string subject, string body)
         {
             Creator = creator;
             AssignedTo = assignedTo;
             Subject = subject;
             Body = body;
             CreatedAt = DateTime.Now;
-            //IssueType = type;
+            IssueType = type;
         }
     }
 }

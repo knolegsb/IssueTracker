@@ -44,7 +44,7 @@ namespace IssueTracker.Web.Controllers
         {
             //var userId = User.Identity.GetUserId();
             //var user = _context.Users.Find(userId);
-            _context.Issues.Add(new Issue(_currentUser.User, null, form.Subject, form.Body));
+            _context.Issues.Add(new Issue(_currentUser.User, null, form.IssueType, form.Subject, form.Body));
             //_context.Logs.Add(new LogAction(user, "New", "Issue", "Created issue"));
             _context.SaveChanges();
 
@@ -65,13 +65,15 @@ namespace IssueTracker.Web.Controllers
             //_context.Logs.Add(new LogAction(user, "View", "Issue", "Viewed issue " + id));
             //_context.SaveChanges();
 
-            return View(new IssueDetailsViewModel
+            var result = View(new IssueDetailsViewModel
             {
                 IssueID = issue.IssueID,
                 Subject = issue.Subject,
                 CreatedAt = issue.CreatedAt,
                 Body = issue.Body
             });
+
+            return result;
         }
 
         [HttpPost, ValidateAntiForgeryToken,Log("Deleted issue {id}")]
