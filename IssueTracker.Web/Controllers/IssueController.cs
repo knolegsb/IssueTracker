@@ -1,8 +1,8 @@
 ﻿using IssueTracker.Web.Data;
 using IssueTracker.Web.Domain;
 using IssueTracker.Web.Filters;
+using IssueTracker.Web.Infrastructure;
 using IssueTracker.Web.Models.Issue;
-using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -12,10 +12,12 @@ namespace IssueTracker.Web.Controllers
     public class IssueController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICurrentUser _currentUser;
 
-        public IssueController(ApplicationDbContext context)
+        public IssueController(ApplicationDbContext context, ICurrentUser currentUser)
         {
             _context = context;
+            _currentUser = currentUser;
         }
 
         [ChildActionOnly]
@@ -40,9 +42,9 @@ namespace IssueTracker.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken, Log("Created issue")]
         public ActionResult New(NewIssueForm form)
         {
-            var userId = User.Identity.GetUserId();
-            var user = _context.Users.Find(userId);
-            _context.Issues.Add(new Issue(user, null, form.Subject, form.Body));
+            //var userId = User.Identity.GetUserId();
+            //var user = _context.Users.Find(userId);
+            _context.Issues.Add(new Issue(_currentUser.User, null, form.Subject, form.Body));
             //_context.Logs.Add(new LogAction(user, "New", "Issue", "Created issue"));
             _context.SaveChanges();
 

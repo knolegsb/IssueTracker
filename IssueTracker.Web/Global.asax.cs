@@ -20,6 +20,7 @@ namespace IssueTracker.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //GlobalConfiguration.Configure(WebApiConfig.Register);
 
             DependencyResolver.SetResolver(new StructureMapDependencyResolver(() => Container ?? ObjectFactory.Container));
 
@@ -35,6 +36,7 @@ namespace IssueTracker.Web
                 cfg.AddRegistry(new StandartRegistry());
                 cfg.AddRegistry(new ControllerRegistry());
                 cfg.AddRegistry(new ActionFilterRegistry(() => Container ?? ObjectFactory.Container));
+                cfg.AddRegistry(new MvcRegistry());
 
                 // for logfilter
                 //cfg.For<IFilterProvider>()

@@ -1,6 +1,6 @@
 ﻿using IssueTracker.Web.Data;
 using IssueTracker.Web.Domain;
-using Microsoft.AspNet.Identity;
+using IssueTracker.Web.Infrastructure;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -11,6 +11,8 @@ namespace IssueTracker.Web.Filters
         //private readonly ApplicationDbContext _context;
         public string Description { get; set; }
         private IDictionary<string, object> _parameters;
+        public ICurrentUser CurrentUser { get; set; }
+        public ApplicationDbContext Context { get; set; }
 
         public LogAttribute(string description/*, ApplicationDbContext context*/)
         {
@@ -26,9 +28,9 @@ namespace IssueTracker.Web.Filters
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            var userId = filterContext.HttpContext.User.Identity.GetUserId();
-            var context = new ApplicationDbContext();
-            var user = context.Users.Find(userId);
+            //var userId = filterContext.HttpContext.User.Identity.GetUserId();
+            //var context = new ApplicationDbContext();
+            //var user = context.Users.Find(userId);
 
             var description = Description;
             foreach (var kvp in _parameters)
@@ -36,12 +38,12 @@ namespace IssueTracker.Web.Filters
                 description = description.Replace("{" + kvp.Key + "}", kvp.Value.ToString());
             }
 
-            context.Logs.Add(new LogAction(user,
+            Context.Logs.Add(new LogAction(CurrentUser.User,
                 filterContext.ActionDescriptor.ActionName,
                 filterContext.ActionDescriptor.ControllerDescriptor.ControllerName,
                 description)); // Description -> description
 
-            context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }
